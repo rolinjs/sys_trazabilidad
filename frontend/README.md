@@ -1,22 +1,29 @@
 # SAC Trazabilidad - Frontend
 
-Frontend del sistema SAC Trazabilidad desarrollado con React.
+Frontend del sistema SAC Trazabilidad desarrollado con React para la gestión y control de los procesos operativos y administrativos relacionados con la trazabilidad de fruta fresca.
 
-## Tecnologías
+---
 
-- React
-- Vite
-- React Router DOM
-- Axios
-- Materialize CSS
-- Material Icons
+## Tecnologías Utilizadas
 
-## Estructura principal
+### Frontend
+
+* React
+* Vite
+* React Router DOM
+* Axios
+* Materialize CSS
+* Material Icons
+
+---
+
+## Estructura Principal del Proyecto
 
 ```text
 src/
 ├── layouts/
 │   └── MainLayout.jsx
+│
 ├── pages/
 │   ├── Home.jsx
 │   ├── garita/
@@ -25,36 +32,55 @@ src/
 │   ├── hidrotermico/
 │   ├── empaque/
 │   └── administracion/
+│
 ├── routes/
 │   └── AppRoutes.jsx
+│
 └── main.jsx
-Módulos implementados
-Layout principal
-Barra superior de navegación.
-Menú principal:
-Garita
-Recepción
-Calibrado
-Hidrotérmico
-Empaque
-Administración
-Menú desplegable de Administración.
-Diseño responsive básico.
-Rutas
+```
 
-Se implementó navegación con React Router DOM.
+---
 
-Rutas principales:
+## Módulos Implementados
 
+### Layout Principal
+
+Características implementadas:
+
+* Barra superior de navegación.
+* Navegación principal del sistema.
+* Menú desplegable para Administración.
+* Resaltado visual de módulo activo.
+* Diseño responsive básico.
+* Integración con React Router DOM.
+
+### Menú Principal
+
+* Garita
+* Recepción
+* Calibrado
+* Hidrotérmico
+* Empaque
+* Administración
+
+---
+
+## Sistema de Rutas
+
+### Rutas Operativas
+
+```text
 /
- /garita
- /recepcion
- /calibrado
- /hidrotermico
- /empaque
+/garita
+/recepcion
+/calibrado
+/hidrotermico
+/empaque
+```
 
-Rutas de administración:
+### Rutas Administrativas
 
+```text
 /administracion/campanias
 /administracion/variedades
 /administracion/clientes
@@ -62,24 +88,116 @@ Rutas de administración:
 /administracion/agricultores
 /administracion/lineas-proceso
 /administracion/tipos-produccion
-Módulo Variedades
+```
 
-Funcionalidades implementadas:
+---
 
-Listar variedades desde backend.
-Buscar por código o nombre.
-Crear variedad.
-Editar variedad.
-Activar / desactivar variedad.
-Modal de creación y edición.
-Modal de confirmación.
-Mensajes de éxito y error.
-Estado visual Activo/Inactivo.
-Visualización de fecha de creación y actualización.
+## Módulo de Variedades
 
-Endpoints consumidos:
+### Funcionalidades Implementadas
 
+* Listado de variedades desde Backend.
+* Búsqueda por código o nombre.
+* Registro de nuevas variedades.
+* Edición de variedades existentes.
+* Activación y desactivación de registros.
+* Modal para creación y edición.
+* Modal de confirmación para cambios de estado.
+* Validaciones básicas en Frontend.
+* Mensajes visuales de éxito y error.
+* Indicadores visuales de estado.
+* Visualización de fecha de creación.
+* Visualización de fecha de actualización.
+
+### Endpoints Consumidos
+
+```http
 GET    /api/variedades/listar-variedades
 POST   /api/variedades/crear-variedad
 PUT    /api/variedades/actualizar-variedad/:uuid
 PATCH  /api/variedades/cambiar-estado-variedad/:uuid
+```
+
+---
+
+## Estado Actual del Desarrollo
+
+### Estructura General
+
+* [x] Configuración inicial del proyecto React
+* [x] Configuración Vite
+* [x] React Router DOM
+* [x] Layout principal
+* [x] Navegación principal
+* [x] Menú Administración
+* [x] Páginas base de módulos operativos
+* [x] Integración Backend mediante Axios
+
+### Módulos Administrativos
+
+* [x] Variedades
+* [ ] Campañas
+* [ ] Clientes
+* [ ] Taras Cliente
+* [ ] Agricultores
+* [ ] Líneas de Proceso
+* [ ] Tipos de Producción
+
+---
+
+## Ejecución del Proyecto
+
+### Instalar Dependencias
+
+```bash
+npm install
+```
+
+### Ejecutar Proyecto
+
+```bash
+npm run dev
+```
+
+### URL Local
+
+```text
+http://localhost:5173
+```
+
+---
+
+## Conexión con Backend
+
+Actualmente el frontend consume servicios REST del backend Node.js mediante Axios.
+
+Servidor configurado:
+
+```text
+http://localhost:3000
+```
+
+---
+
+## Próximas Mejoras
+
+* Implementación de CRUD visual para campañas.
+* Implementación de CRUD visual para clientes.
+* Implementación de CRUD visual para agricultores.
+* Componentes reutilizables para tablas.
+* Componentes reutilizables para modales.
+* Servicios Axios por módulo.
+* Sistema global de notificaciones.
+* Autenticación y autorización.
+* Gestión de roles y permisos.
+* Dashboard operativo.
+* Reportes y estadísticas.
+* Optimización de experiencia móvil.
+
+---
+
+## Versión Actual
+
+**Versión:** 0.1.0
+
+Proyecto en fase inicial de construcción y validación funcional.
