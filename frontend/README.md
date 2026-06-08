@@ -1,16 +1,85 @@
-# React + Vite
+# SAC Trazabilidad - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend del sistema SAC Trazabilidad desarrollado con React.
 
-Currently, two official plugins are available:
+## Tecnologías
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React
+- Vite
+- React Router DOM
+- Axios
+- Materialize CSS
+- Material Icons
 
-## React Compiler
+## Estructura principal
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```text
+src/
+├── layouts/
+│   └── MainLayout.jsx
+├── pages/
+│   ├── Home.jsx
+│   ├── garita/
+│   ├── recepcion/
+│   ├── calibrado/
+│   ├── hidrotermico/
+│   ├── empaque/
+│   └── administracion/
+├── routes/
+│   └── AppRoutes.jsx
+└── main.jsx
+Módulos implementados
+Layout principal
+Barra superior de navegación.
+Menú principal:
+Garita
+Recepción
+Calibrado
+Hidrotérmico
+Empaque
+Administración
+Menú desplegable de Administración.
+Diseño responsive básico.
+Rutas
 
-## Expanding the ESLint configuration
+Se implementó navegación con React Router DOM.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Rutas principales:
+
+/
+ /garita
+ /recepcion
+ /calibrado
+ /hidrotermico
+ /empaque
+
+Rutas de administración:
+
+/administracion/campanias
+/administracion/variedades
+/administracion/clientes
+/administracion/taras-cliente
+/administracion/agricultores
+/administracion/lineas-proceso
+/administracion/tipos-produccion
+Módulo Variedades
+
+Funcionalidades implementadas:
+
+Listar variedades desde backend.
+Buscar por código o nombre.
+Crear variedad.
+Editar variedad.
+Activar / desactivar variedad.
+Modal de creación y edición.
+Modal de confirmación.
+Mensajes de éxito y error.
+Estado visual Activo/Inactivo.
+Visualización de fecha de creación y actualización.
+
+Endpoints consumidos:
+
+GET    /api/variedades/listar-variedades
+POST   /api/variedades/crear-variedad
+PUT    /api/variedades/actualizar-variedad/:uuid
+PATCH  /api/variedades/cambiar-estado-variedad/:uuid
