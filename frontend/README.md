@@ -1,12 +1,12 @@
 # SAC Trazabilidad - Frontend
 
-Frontend del sistema SAC Trazabilidad desarrollado con React para la gestión y control de los procesos operativos y administrativos relacionados con la trazabilidad de fruta fresca.
+Frontend del sistema SAC Trazabilidad desarrollado con React para la gestión, control y trazabilidad de fruta fresca durante las diferentes etapas operativas y administrativas de planta.
 
 ---
 
-## Tecnologías Utilizadas
+# Tecnologías Utilizadas
 
-### Frontend
+## Frontend
 
 * React
 * Vite
@@ -17,7 +17,7 @@ Frontend del sistema SAC Trazabilidad desarrollado con React para la gestión y 
 
 ---
 
-## Estructura Principal del Proyecto
+# Estructura Principal del Proyecto
 
 ```text
 src/
@@ -41,33 +41,47 @@ src/
 
 ---
 
-## Módulos Implementados
+# Módulos Implementados
 
-### Layout Principal
+## Layout Principal
 
 Características implementadas:
 
 * Barra superior de navegación.
 * Navegación principal del sistema.
 * Menú desplegable para Administración.
-* Resaltado visual de módulo activo.
-* Diseño responsive básico.
+* Resaltado visual del módulo activo.
+* Diseño responsive.
 * Integración con React Router DOM.
+* Estructura preparada para crecimiento modular.
 
-### Menú Principal
+---
+
+## Menú Principal
+
+### Módulos Operativos
 
 * Garita
 * Recepción
 * Calibrado
 * Hidrotérmico
 * Empaque
-* Administración
+
+### Módulos Administrativos
+
+* Campañas
+* Variedades
+* Clientes
+* Taras Cliente
+* Agricultores
+* Líneas de Proceso
+* Tipos de Producción
 
 ---
 
-## Sistema de Rutas
+# Sistema de Rutas
 
-### Rutas Operativas
+## Rutas Operativas
 
 ```text
 /
@@ -78,7 +92,7 @@ Características implementadas:
 /empaque
 ```
 
-### Rutas Administrativas
+## Rutas Administrativas
 
 ```text
 /administracion/campanias
@@ -92,9 +106,9 @@ Características implementadas:
 
 ---
 
-## Módulo de Variedades
+# Módulo de Variedades
 
-### Funcionalidades Implementadas
+## Funcionalidades Implementadas
 
 * Listado de variedades desde Backend.
 * Búsqueda por código o nombre.
@@ -109,7 +123,7 @@ Características implementadas:
 * Visualización de fecha de creación.
 * Visualización de fecha de actualización.
 
-### Endpoints Consumidos
+## Endpoints Consumidos
 
 ```http
 GET    /api/variedades/listar-variedades
@@ -120,56 +134,50 @@ PATCH  /api/variedades/cambiar-estado-variedad/:uuid
 
 ---
 
-## Estado Actual del Desarrollo
+# Módulo de Campañas
 
-### Estructura General
+## Funcionalidades Implementadas
 
-* [x] Configuración inicial del proyecto React
-* [x] Configuración Vite
-* [x] React Router DOM
-* [x] Layout principal
-* [x] Navegación principal
-* [x] Menú Administración
-* [x] Páginas base de módulos operativos
-* [x] Integración Backend mediante Axios
+* Listado de campañas desde Backend.
+* Búsqueda por nombre, producto y observación.
+* Registro de nuevas campañas.
+* Edición de campañas abiertas.
+* Cierre de campañas.
+* Modal para creación.
+* Modal para edición.
+* Modal de confirmación para cierre.
+* Validaciones básicas en Frontend.
+* Mensajes visuales de éxito y error.
+* Indicadores visuales de estado.
+* Visualización de fecha de inicio.
+* Visualización de fecha de fin.
+* Visualización de fecha de creación.
+* Visualización de fecha de actualización.
+* Refresco automático del listado después de crear, editar o cerrar.
 
-### Módulos Administrativos
+## Reglas de Negocio Implementadas
 
-* [x] Variedades
-* [ ] Campañas
-* [ ] Clientes
-* [ ] Taras Cliente
-* [ ] Agricultores
-* [ ] Líneas de Proceso
-* [ ] Tipos de Producción
+* Una campaña cerrada no puede ser editada.
+* Una campaña cerrada no puede volver a cerrarse.
+* El cierre de campaña registra automáticamente la fecha de cierre.
+* El estado visual depende de la fecha de cierre registrada.
+* Las campañas abiertas permiten edición.
+* Las campañas cerradas quedan bloqueadas para modificación.
 
----
+## Endpoints Consumidos
 
-## Ejecución del Proyecto
-
-### Instalar Dependencias
-
-```bash
-npm install
-```
-
-### Ejecutar Proyecto
-
-```bash
-npm run dev
-```
-
-### URL Local
-
-```text
-http://localhost:5173
+```http
+GET    /api/campanias/listar-campanias
+POST   /api/campanias/crear-campania
+PUT    /api/campanias/actualizar-campania/:uuid
+PATCH  /api/campanias/cerrar-campania/:uuid
 ```
 
 ---
 
-## Conexión con Backend
+# Integración Backend
 
-Actualmente el frontend consume servicios REST del backend Node.js mediante Axios.
+Actualmente el frontend consume servicios REST desarrollados en Node.js y PostgreSQL mediante Axios.
 
 Servidor configurado:
 
@@ -179,25 +187,103 @@ http://localhost:3000
 
 ---
 
-## Próximas Mejoras
+# Estado Actual del Desarrollo
 
-* Implementación de CRUD visual para campañas.
-* Implementación de CRUD visual para clientes.
-* Implementación de CRUD visual para agricultores.
-* Componentes reutilizables para tablas.
-* Componentes reutilizables para modales.
-* Servicios Axios por módulo.
-* Sistema global de notificaciones.
-* Autenticación y autorización.
-* Gestión de roles y permisos.
-* Dashboard operativo.
-* Reportes y estadísticas.
-* Optimización de experiencia móvil.
+## Estructura General
+
+* [x] Configuración inicial React
+* [x] Configuración Vite
+* [x] React Router DOM
+* [x] Axios
+* [x] Layout principal
+* [x] Navegación principal
+* [x] Menú Administración
+* [x] Responsive básico
+* [x] Integración Backend
+
+## Módulos Administrativos
+
+* [x] Campañas
+* [x] Variedades
+* [ ] Clientes
+* [ ] Taras Cliente
+* [ ] Agricultores
+* [ ] Líneas de Proceso
+* [ ] Tipos de Producción
+
+## Módulos Operativos
+
+* [ ] Garita
+* [ ] Recepción
+* [ ] Calibrado
+* [ ] Hidrotérmico
+* [ ] Empaque
 
 ---
 
-## Versión Actual
+# Próximas Mejoras
 
-**Versión:** 0.1.0
+## Arquitectura
 
-Proyecto en fase inicial de construcción y validación funcional.
+* Componentes reutilizables para tablas.
+* Componentes reutilizables para formularios.
+* Componentes reutilizables para modales.
+* Servicios Axios por módulo.
+* Manejo centralizado de errores.
+* Configuración de variables de entorno.
+* Hooks reutilizables.
+
+## Funcionalidad
+
+* CRUD de Clientes.
+* CRUD de Taras Cliente.
+* CRUD de Agricultores.
+* CRUD de Líneas de Proceso.
+* CRUD de Tipos de Producción.
+* Gestión de campañas y relaciones.
+* Gestión de lotes.
+* Recepción de fruta.
+* Calidad.
+* Abastecimiento.
+* Clasificación.
+* Descarte.
+* Entarimado.
+* Reportes operativos.
+
+## Seguridad
+
+* Autenticación.
+* Autorización.
+* Roles.
+* Permisos.
+* Protección de rutas.
+
+---
+
+# Instalación
+
+## Instalar dependencias
+
+```bash
+npm install
+```
+
+## Ejecutar entorno de desarrollo
+
+```bash
+npm run dev
+```
+
+## URL Local
+
+```text
+http://localhost:5173
+```
+
+---
+
+# Versión Actual
+
+**Versión:** 0.2.0
+
+Proyecto en fase activa de construcción orientado a la gestión de trazabilidad de fruta fresca para procesos de exportación.
