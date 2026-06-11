@@ -33,6 +33,8 @@ src/
 │   ├── empaque/
 │   └── administracion/
 │
+├── services/
+│
 ├── routes/
 │   └── AppRoutes.jsx
 │
@@ -57,9 +59,9 @@ Características implementadas:
 
 ---
 
-## Menú Principal
+# Menú Principal
 
-### Módulos Operativos
+## Módulos Operativos
 
 * Garita
 * Recepción
@@ -67,7 +69,7 @@ Características implementadas:
 * Hidrotérmico
 * Empaque
 
-### Módulos Administrativos
+## Módulos Administrativos
 
 * Campañas
 * Variedades
@@ -122,6 +124,7 @@ Características implementadas:
 * Indicadores visuales de estado.
 * Visualización de fecha de creación.
 * Visualización de fecha de actualización.
+* Refresco automático del listado.
 
 ## Endpoints Consumidos
 
@@ -149,20 +152,16 @@ PATCH  /api/variedades/cambiar-estado-variedad/:uuid
 * Validaciones básicas en Frontend.
 * Mensajes visuales de éxito y error.
 * Indicadores visuales de estado.
-* Visualización de fecha de inicio.
-* Visualización de fecha de fin.
-* Visualización de fecha de creación.
-* Visualización de fecha de actualización.
-* Refresco automático del listado después de crear, editar o cerrar.
+* Visualización de fechas.
+* Refresco automático del listado.
 
 ## Reglas de Negocio Implementadas
 
 * Una campaña cerrada no puede ser editada.
 * Una campaña cerrada no puede volver a cerrarse.
-* El cierre de campaña registra automáticamente la fecha de cierre.
+* El cierre registra automáticamente la fecha de cierre.
 * El estado visual depende de la fecha de cierre registrada.
 * Las campañas abiertas permiten edición.
-* Las campañas cerradas quedan bloqueadas para modificación.
 
 ## Endpoints Consumidos
 
@@ -171,6 +170,66 @@ GET    /api/campanias/listar-campanias
 POST   /api/campanias/crear-campania
 PUT    /api/campanias/actualizar-campania/:uuid
 PATCH  /api/campanias/cerrar-campania/:uuid
+```
+
+---
+
+# Módulo de Clientes / Exportadores
+
+## Funcionalidades Implementadas
+
+* Listado de clientes desde Backend.
+* Búsqueda por código, razón social y RUC.
+* Registro de nuevos clientes.
+* Edición de clientes existentes.
+* Activación y desactivación de registros.
+* Visualización detallada mediante modal.
+* Formulario dividido en pasos.
+* Validaciones de negocio en Frontend.
+* Mensajes visuales de éxito y error.
+* Paginación de registros.
+* Indicadores de activos, inactivos y total.
+* Refresco automático del listado.
+* Visualización de fechas de creación y actualización.
+
+## Reglas de Negocio Implementadas
+
+* Código obligatorio.
+* Razón social obligatoria.
+* RUC obligatorio.
+* El RUC debe contener 11 dígitos.
+* No se permiten códigos duplicados.
+* No se permiten RUC duplicados.
+* El código no puede modificarse durante la edición.
+* Los datos opcionales pueden actualizarse posteriormente.
+* Los clientes pueden activarse o desactivarse.
+* El detalle muestra toda la información almacenada.
+
+## Información Administrada
+
+### Datos Obligatorios
+
+* Código
+* Razón Social
+* RUC
+
+### Datos Opcionales
+
+* Dirección Fiscal
+* Representante Legal
+* Teléfono Principal
+* Correo Principal
+* Persona de Contacto en Planta
+* Teléfono de Contacto
+* Correo de Contacto
+
+## Endpoints Consumidos
+
+```http
+GET    /api/clientes/listar-clientes
+POST   /api/clientes/crear-cliente
+PUT    /api/clientes/actualizar-cliente/:uuid
+PATCH  /api/clientes/cambiar-estado-cliente/:uuid
 ```
 
 ---
@@ -205,7 +264,7 @@ http://localhost:3000
 
 * [x] Campañas
 * [x] Variedades
-* [ ] Clientes
+* [x] Clientes
 * [ ] Taras Cliente
 * [ ] Agricultores
 * [ ] Líneas de Proceso
@@ -228,19 +287,17 @@ http://localhost:3000
 * Componentes reutilizables para tablas.
 * Componentes reutilizables para formularios.
 * Componentes reutilizables para modales.
-* Servicios Axios por módulo.
+* Servicios Axios centralizados.
 * Manejo centralizado de errores.
-* Configuración de variables de entorno.
+* Variables de entorno.
 * Hooks reutilizables.
 
 ## Funcionalidad
 
-* CRUD de Clientes.
 * CRUD de Taras Cliente.
 * CRUD de Agricultores.
 * CRUD de Líneas de Proceso.
 * CRUD de Tipos de Producción.
-* Gestión de campañas y relaciones.
 * Gestión de lotes.
 * Recepción de fruta.
 * Calidad.
@@ -249,6 +306,7 @@ http://localhost:3000
 * Descarte.
 * Entarimado.
 * Reportes operativos.
+* Dashboard de indicadores.
 
 ## Seguridad
 
@@ -284,6 +342,6 @@ http://localhost:5173
 
 # Versión Actual
 
-**Versión:** 0.2.0
+**Versión:** 0.3.0
 
-Proyecto en fase activa de construcción orientado a la gestión de trazabilidad de fruta fresca para procesos de exportación.
+Proyecto en fase activa de construcción orientado a la gestión de trazabilidad de fruta fresca para procesos de exportación, integrando módulos administrativos y operativos para el control integral de planta.
