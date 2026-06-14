@@ -265,7 +265,7 @@ http://localhost:3000
 * [x] Campañas
 * [x] Variedades
 * [x] Clientes
-* [ ] Taras Cliente
+* [x] Taras Cliente
 * [ ] Agricultores
 * [ ] Líneas de Proceso
 * [ ] Tipos de Producción
