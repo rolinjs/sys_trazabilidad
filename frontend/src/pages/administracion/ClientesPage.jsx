@@ -32,7 +32,6 @@ function ClientesPage() {
   });
 
   const [form, setForm] = useState({
-    codigo: "",
     razon_social: "",
     ruc: "",
     direccion_fiscal: "",
@@ -81,7 +80,6 @@ function ClientesPage() {
   const dataPaginada = data.slice(indiceInicial, indiceFinal);
 
   const datosObligatoriosCompletos =
-    form.codigo.trim() &&
     form.razon_social.trim() &&
     form.ruc.trim() &&
     form.ruc.trim().length === 11;
@@ -109,7 +107,6 @@ function ClientesPage() {
 
   const limpiarFormulario = () => {
     setForm({
-      codigo: "",
       razon_social: "",
       ruc: "",
       direccion_fiscal: "",
@@ -136,14 +133,6 @@ function ClientesPage() {
       tipo: "",
       texto: ""
     });
-
-    if (!form.codigo.trim()) {
-      setMensajeFormulario({
-        tipo: "error",
-        texto: "Ingrese el código del cliente."
-      });
-      return;
-    }
 
     if (!form.razon_social.trim()) {
       setMensajeFormulario({
@@ -173,115 +162,95 @@ function ClientesPage() {
   };
 
   const guardarCliente = async () => {
-    try {
-      setGuardando(true);
-      setMensajeFormulario({
-        tipo: "",
-        texto: ""
-      });
+  try {
+    setGuardando(true);
+    setMensajeFormulario({
+      tipo: "",
+      texto: ""
+    });
 
-      if (!form.codigo.trim()) {
-        setPasoFormulario(1);
-        setMensajeFormulario({
-          tipo: "error",
-          texto: "El código del cliente es obligatorio."
-        });
-        return;
-      }
-
-      if (!form.razon_social.trim()) {
-        setPasoFormulario(1);
-        setMensajeFormulario({
-          tipo: "error",
-          texto: "La razón social es obligatoria."
-        });
-        return;
-      }
-
-      if (!form.ruc.trim()) {
-        setPasoFormulario(1);
-        setMensajeFormulario({
-          tipo: "error",
-          texto: "El RUC es obligatorio."
-        });
-        return;
-      }
-
-      if (form.ruc.trim().length !== 11) {
-        setPasoFormulario(1);
-        setMensajeFormulario({
-          tipo: "error",
-          texto: "El RUC debe tener 11 dígitos."
-        });
-        return;
-      }
-
-      const body = {
-        codigo: form.codigo.trim().toUpperCase(),
-        razon_social: form.razon_social.trim(),
-        ruc: form.ruc.trim(),
-        direccion_fiscal: form.direccion_fiscal.trim() || null,
-        representante_legal: form.representante_legal.trim() || null,
-        telefono_principal: form.telefono_principal.trim() || null,
-        correo_principal: form.correo_principal.trim() || null,
-        persona_contacto_planta: form.persona_contacto_planta.trim() || null,
-        telefono_contacto: form.telefono_contacto.trim() || null,
-        correo_contacto: form.correo_contacto.trim() || null
-      };
-
-      let response;
-
-      if (modoFormulario === "crear") {
-        response = await crearClientesService(body);
-      } else {
-        response = await actualizarClientesService(clienteEditando.uuid, {
-          razon_social: body.razon_social,
-          ruc: body.ruc,
-          direccion_fiscal: body.direccion_fiscal,
-          representante_legal: body.representante_legal,
-          telefono_principal: body.telefono_principal,
-          correo_principal: body.correo_principal,
-          persona_contacto_planta: body.persona_contacto_planta,
-          telefono_contacto: body.telefono_contacto,
-          correo_contacto: body.correo_contacto
-        });
-      }
-
-      if (!response.success) {
-        setMensajeFormulario({
-          tipo: "success",
-          texto:
-            response.message ||
-            (modoFormulario === "crear"
-              ? "Cliente registrado correctamente."
-              : "Cliente actualizado correctamente.")
-        });
-        return;
-      }
-
-      setMensajeFormulario({
-        tipo: "success",
-        texto: response.message || "Cliente registrado correctamente."
-      });
-
-      await listarClientes();
-
-      setTimeout(() => {
-        limpiarFormulario();
-      }, 700);
-    } catch (error) {
-      console.log("Error al guardar cliente:", error);
-
+    if (!form.razon_social.trim()) {
+      setPasoFormulario(1);
       setMensajeFormulario({
         tipo: "error",
-        texto:
-          error.response?.data?.message ||
-          "No se pudo conectar con el servidor."
+        texto: "La razón social es obligatoria."
       });
-    } finally {
-      setGuardando(false);
+      return;
     }
-  };
+
+    if (!form.ruc.trim()) {
+      setPasoFormulario(1);
+      setMensajeFormulario({
+        tipo: "error",
+        texto: "El RUC es obligatorio."
+      });
+      return;
+    }
+
+    if (form.ruc.trim().length !== 11) {
+      setPasoFormulario(1);
+      setMensajeFormulario({
+        tipo: "error",
+        texto: "El RUC debe tener 11 dígitos."
+      });
+      return;
+    }
+
+    const body = {
+      razon_social: form.razon_social.trim(),
+      ruc: form.ruc.trim(),
+      direccion_fiscal: form.direccion_fiscal.trim() || null,
+      representante_legal: form.representante_legal.trim() || null,
+      telefono_principal: form.telefono_principal.trim() || null,
+      correo_principal: form.correo_principal.trim() || null,
+      persona_contacto_planta: form.persona_contacto_planta.trim() || null,
+      telefono_contacto: form.telefono_contacto.trim() || null,
+      correo_contacto: form.correo_contacto.trim() || null
+    };
+
+    let response;
+
+    if (modoFormulario === "crear") {
+      response = await crearClientesService(body);
+    } else {
+      response = await actualizarClientesService(clienteEditando.uuid, body);
+    }
+
+    if (!response.success) {
+      setMensajeFormulario({
+        tipo: "error",
+        texto: response.message || "No se pudo guardar el cliente."
+      });
+      return;
+    }
+
+    setMensajeFormulario({
+      tipo: "success",
+      texto:
+        response.message ||
+        (modoFormulario === "crear"
+          ? "Cliente registrado correctamente."
+          : "Cliente actualizado correctamente.")
+    });
+
+    await listarClientes();
+
+    setTimeout(() => {
+      limpiarFormulario();
+    }, 700);
+  } catch (error) {
+    console.log("Error al guardar cliente:", error);
+
+    setMensajeFormulario({
+      tipo: "error",
+      texto:
+        error.response?.data?.message ||
+        "No se pudo conectar con el servidor."
+    });
+  } finally {
+    setGuardando(false);
+  }
+};
 
   if (loading) {
     return (
@@ -399,6 +368,10 @@ function ClientesPage() {
       texto: ""
     });
   };
+
+  const siguienteCodigo = String(
+    clientes.length + 1
+  ).padStart(2, "0");
 
   return (
     <div style={{ padding: "12px 16px" }}>
@@ -518,16 +491,20 @@ function ClientesPage() {
               {pasoFormulario === 1 && (
                 <>
                   <div style={{ marginBottom: "10px" }}>
-                    <label>Código *</label>
+                    <label>Código</label>
+
                     <input
                       type="text"
-                      name="codigo"
-                      value={form.codigo}
-                      onChange={handleChange}
-                      disabled={modoFormulario === "editar"}
-                      placeholder="Ej. AGP"
-                      maxLength="10"
-                      style={{ margin: 0, height: "32px", fontSize: "13px" }}
+                      value={siguienteCodigo}
+                      readOnly
+                      style={{
+                        margin: 0,
+                        height: "32px",
+                        fontSize: "13px",
+                        background: "#f5f5f5",
+                        color: "#616161",
+                        fontWeight: "600"
+                      }}
                     />
                   </div>
 

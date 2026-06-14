@@ -20,6 +20,7 @@ import ClientesPage from "../pages/administracion/ClientesPage";
 import AgricultoresPage from "../pages/administracion/AgricultoresPage";
 import LineasProcesoPage from "../pages/administracion/LineasProcesoPage";
 import TiposProduccionPage from "../pages/administracion/TiposProduccionPage";
+import TarasClientePage from "../pages/administracion/TarasClientePage";
 
 function AppRoutes() {
   return (
@@ -45,6 +46,7 @@ function AppRoutes() {
         <Route path="administracion/agricultores" element={<AgricultoresPage />} />
         <Route path="administracion/lineas-proceso" element={<LineasProcesoPage />} />
         <Route path="administracion/tipos-produccion" element={<TiposProduccionPage />} />
+        <Route path="administracion/taras-cliente" element={<TarasClientePage />} />
       </Route>
     </Routes>
   );

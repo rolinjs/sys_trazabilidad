@@ -26,7 +26,7 @@ function MainLayout() {
 
   return (
     <>
-      <nav className="blue darken-3">
+      <nav className="light-blue darken-4">
         <div
           className="nav-wrapper"
           style={{
@@ -201,32 +201,45 @@ function MainLayout() {
           </NavLink>
 
           <div
+            onClick={() => setAdminOpen(!adminOpen)}
             style={{
-              padding: "8px 14px",
-              fontSize: "13px",
+              ...mobileItemStyle,
+              justifyContent: "space-between",
               fontWeight: 600,
               color: "#1565c0",
               borderTop: "1px solid #eee",
-              borderBottom: "1px solid #eee"
+              cursor: "pointer"
             }}
           >
-            Administración
+            <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <i className="material-icons">settings</i>
+              Administración
+            </span>
+
+            <i className="material-icons" style={{ fontSize: "18px" }}>
+              {adminOpen ? "keyboard_arrow_up" : "keyboard_arrow_down"}
+            </i>
           </div>
 
-          {adminItems.map(([ruta, texto]) => (
-            <NavLink
-              key={ruta}
-              to={`/administracion/${ruta}`}
-              onClick={cerrarMenus}
-              style={{
-                ...mobileItemStyle,
-                paddingLeft: "28px",
-                fontSize: "13px"
-              }}
-            >
-              {texto}
-            </NavLink>
-          ))}
+          {adminOpen && (
+            <div style={{ background: "#fafafa" }}>
+              {adminItems.map(([ruta, texto]) => (
+                <NavLink
+                  key={ruta}
+                  to={`/administracion/${ruta}`}
+                  onClick={cerrarMenus}
+                  style={{
+                    ...mobileItemStyle,
+                    paddingLeft: "34px",
+                    fontSize: "13px",
+                    background: "#fafafa"
+                  }}
+                >
+                  {texto}
+                </NavLink>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

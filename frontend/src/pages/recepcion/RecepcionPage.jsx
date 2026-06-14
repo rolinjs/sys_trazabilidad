@@ -7,51 +7,35 @@ function RecepcionPage() {
 
   return (
     <>
-      <div className="grey lighten-4" style={{ padding: "14px 20px" }}>
+      <div className="grey lighten-4" style={{ padding: "10px 16px" }}>
         <div className="row" style={{ marginBottom: 0 }}>
           <div className="col s12 m3">
             <NavLink to="/recepcion/guias/plan-diario" style={{ color: "inherit" }}>
-              <div className="card-panel white center hoverable" style={{ margin: 0 }}>
-                <i className="material-icons blue-text text-darken-3">
-                  description
-                </i>
-                <div className="blue-text text-darken-3" style={{ fontWeight: "600" }}>
-                  Guías
-                </div>
+              <div className="card-panel white hoverable" style={{ margin: "0 0 8px 0", padding: "10px 14px", display: "flex", alignItems: "center", gap: "10px", borderLeft: "4px solid #1565c0" }}>
+                <i className="material-icons blue-text text-darken-3">description</i>
+                <span className="blue-text text-darken-3" style={{ fontWeight: "600", fontSize: "13px" }}>Guías</span>
               </div>
             </NavLink>
           </div>
 
           <div className="col s12 m3">
-            <div className="card-panel white center hoverable" style={{ margin: 0, cursor: "pointer" }}>
-              <i className="material-icons blue-text text-darken-3">
-                move_to_inbox
-              </i>
-              <div className="blue-text text-darken-3" style={{ fontWeight: "600" }}>
-                Descarga
-              </div>
+            <div className="card-panel white hoverable" style={{ margin: "0 0 8px 0", padding: "10px 14px", display: "flex", alignItems: "center", gap: "10px", borderLeft: "4px solid #1565c0", cursor: "pointer" }}>
+              <i className="material-icons blue-text text-darken-3">move_to_inbox</i>
+              <span className="blue-text text-darken-3" style={{ fontWeight: "600", fontSize: "13px" }}>Descarga</span>
             </div>
           </div>
 
           <div className="col s12 m3">
-            <div className="card-panel white center hoverable" style={{ margin: 0, cursor: "pointer" }}>
-              <i className="material-icons blue-text text-darken-3">
-                scale
-              </i>
-              <div className="blue-text text-darken-3" style={{ fontWeight: "600" }}>
-                Pesaje
-              </div>
+            <div className="card-panel white hoverable" style={{ margin: "0 0 8px 0", padding: "10px 14px", display: "flex", alignItems: "center", gap: "10px", borderLeft: "4px solid #1565c0", cursor: "pointer" }}>
+              <i className="material-icons blue-text text-darken-3">scale</i>
+              <span className="blue-text text-darken-3" style={{ fontWeight: "600", fontSize: "13px" }}>Pesaje</span>
             </div>
           </div>
 
           <div className="col s12 m3">
-            <div className="card-panel white center hoverable" style={{ margin: 0, cursor: "pointer" }}>
-              <i className="material-icons blue-text text-darken-3">
-                fact_check
-              </i>
-              <div className="blue-text text-darken-3" style={{ fontWeight: "600" }}>
-                Inspección SENASA
-              </div>
+            <div className="card-panel white hoverable" style={{ margin: "0 0 8px 0", padding: "10px 14px", display: "flex", alignItems: "center", gap: "10px", borderLeft: "4px solid #1565c0", cursor: "pointer" }}>
+              <i className="material-icons blue-text text-darken-3">fact_check</i>
+              <span className="blue-text text-darken-3" style={{ fontWeight: "600", fontSize: "13px" }}>Inspección SENASA</span>
             </div>
           </div>
         </div>
