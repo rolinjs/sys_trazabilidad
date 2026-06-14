@@ -26,7 +26,7 @@ function MainLayout() {
 
   return (
     <>
-      <nav className="light-blue darken-4">
+      <nav className="blue darken-3">
         <div
           className="nav-wrapper"
           style={{

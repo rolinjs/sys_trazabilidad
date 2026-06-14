@@ -5,110 +5,210 @@ function RecepcionPage() {
 
   const mostrarTabsGuias = location.pathname.startsWith("/recepcion/guias");
 
+  const opcionesRecepcion = [
+    {
+      texto: "GUÍAS",
+      icono: "description",
+      ruta: "/recepcion/guias/plan-diario",
+      destacado: true
+    },
+    {
+      texto: "FICHA DE\nCAMIÓN",
+      icono: "local_shipping",
+      ruta: "/recepcion/ficha-camion"
+    },
+    {
+      texto: "GUARDAR\nRECEPCIÓN",
+      icono: "save",
+      ruta: "/recepcion/guardar-recepcion",
+    },
+    {
+      texto: "DATOS\nPROVEEDOR",
+      icono: "person",
+      ruta: "/recepcion/datos-proveedor"
+    },
+    {
+      texto: "HISTORIAL\nINGRESOS",
+      icono: "folder_open",
+      ruta: "/recepcion/historial-ingresos"
+    }
+  ];
+
+  const esActivo = (ruta) => {
+    if (ruta.startsWith("/recepcion/guias")) {
+      return location.pathname.startsWith("/recepcion/guias");
+    }
+
+    return location.pathname.startsWith(ruta);
+  };
+
   return (
     <>
-      <div className="grey lighten-4" style={{ padding: "10px 16px" }}>
-        <div className="row" style={{ marginBottom: 0 }}>
-          <div className="col s12 m3">
-            <NavLink to="/recepcion/guias/plan-diario" style={{ color: "inherit" }}>
-              <div className="card-panel white hoverable" style={{ margin: "0 0 8px 0", padding: "10px 14px", display: "flex", alignItems: "center", gap: "10px", borderLeft: "4px solid #1565c0" }}>
-                <i className="material-icons blue-text text-darken-3">description</i>
-                <span className="blue-text text-darken-3" style={{ fontWeight: "600", fontSize: "13px" }}>Guías</span>
+      <div
+        className="white"
+        style={{
+          borderBottom: "1px solid #ddd",
+          padding: "5px 12px 0 12px",
+          overflowX: "auto",
+          whiteSpace: "nowrap"
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "stretch",
+            minHeight: "60px"
+          }}
+        >
+          {opcionesRecepcion.map((item, index) => (
+            <NavLink
+              key={item.ruta}
+              to={item.ruta}
+              style={{
+                textDecoration: "none",
+                color: "inherit"
+              }}
+            >
+              <div
+                style={{
+                  width: "96px",
+                  minHeight: "58px",
+                  padding: "5px 6px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "2px",
+                  background: esActivo(item.ruta) ? "#f5f8ff" : "#fff",
+                  borderBottom: esActivo(item.ruta)
+                    ? "3px solid #1565c0"
+                    : "3px solid transparent",
+                  borderRight:
+                    index === 4 ? "1px solid #ddd" : "1px solid transparent"
+                }}
+              >
+                <i
+                  className="material-icons"
+                  style={{
+                    fontSize: "22px",
+                    color: item.destacado
+                      ? "#2962ff"
+                      : esActivo(item.ruta)
+                        ? "#1565c0"
+                        : "#555"
+                  }}
+                >
+                  {item.icono}
+                </i>
+
+                <span
+                  style={{
+                    fontSize: "10px",
+                    lineHeight: "11px",
+                    fontWeight: item.destacado || esActivo(item.ruta) ? 700 : 500,
+                    textAlign: "center",
+                    whiteSpace: "pre-line",
+                    color: item.destacado
+                      ? "#2962ff"
+                      : esActivo(item.ruta)
+                        ? "#1565c0"
+                        : "#333"
+                  }}
+                >
+                  {item.texto}
+                </span>
               </div>
             </NavLink>
-          </div>
-
-          <div className="col s12 m3">
-            <div className="card-panel white hoverable" style={{ margin: "0 0 8px 0", padding: "10px 14px", display: "flex", alignItems: "center", gap: "10px", borderLeft: "4px solid #1565c0", cursor: "pointer" }}>
-              <i className="material-icons blue-text text-darken-3">move_to_inbox</i>
-              <span className="blue-text text-darken-3" style={{ fontWeight: "600", fontSize: "13px" }}>Descarga</span>
-            </div>
-          </div>
-
-          <div className="col s12 m3">
-            <div className="card-panel white hoverable" style={{ margin: "0 0 8px 0", padding: "10px 14px", display: "flex", alignItems: "center", gap: "10px", borderLeft: "4px solid #1565c0", cursor: "pointer" }}>
-              <i className="material-icons blue-text text-darken-3">scale</i>
-              <span className="blue-text text-darken-3" style={{ fontWeight: "600", fontSize: "13px" }}>Pesaje</span>
-            </div>
-          </div>
-
-          <div className="col s12 m3">
-            <div className="card-panel white hoverable" style={{ margin: "0 0 8px 0", padding: "10px 14px", display: "flex", alignItems: "center", gap: "10px", borderLeft: "4px solid #1565c0", cursor: "pointer" }}>
-              <i className="material-icons blue-text text-darken-3">fact_check</i>
-              <span className="blue-text text-darken-3" style={{ fontWeight: "600", fontSize: "13px" }}>Inspección SENASA</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
       {mostrarTabsGuias && (
-        <div
-          className="white"
-          style={{
-            padding: "0 20px",
-            borderBottom: "1px solid #e0e0e0"
-          }}
-        >
-          <ul
-            className="tabs"
-            style={{
-              height: "42px",
-              display: "flex"
-            }}
-          >
-            <li className="tab">
-              <NavLink
-                to="/recepcion/guias/plan-diario"
-                className="blue-text text-darken-3"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px"
-                }}
-              >
-                <i className="material-icons" style={{ margin: 0 }}>
-                  today
-                </i>
-                Plan Diario
-              </NavLink>
-            </li>
+  <div
+    className="white"
+    style={{
+      padding: "6px 20px",
+      borderBottom: "1px solid #e0e0e0",
+      background: "#fafafa"
+    }}
+  >
+    <div
+      style={{
+        display: "flex",
+        gap: "8px",
+        alignItems: "center",
+        overflowX: "auto",
+        whiteSpace: "nowrap"
+      }}
+    >
+      <NavLink
+        to="/recepcion/guias/plan-diario"
+        style={({ isActive }) => ({
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+          padding: "7px 12px",
+          borderRadius: "4px",
+          textDecoration: "none",
+          fontSize: "12px",
+          fontWeight: 600,
+          color: isActive ? "#fff" : "#424242",
+          background: isActive ? "#1565c0" : "#fff",
+          border: isActive ? "1px solid #1565c0" : "1px solid #ddd"
+        })}
+      >
+        <i className="material-icons" style={{ fontSize: "18px" }}>
+          today
+        </i>
+        Plan Diario
+      </NavLink>
 
-            <li className="tab">
-              <NavLink
-                to="/recepcion/guias/registro"
-                className="blue-text text-darken-3"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px"
-                }}
-              >
-                <i className="material-icons" style={{ margin: 0 }}>
-                  post_add
-                </i>
-                Registro de Guías
-              </NavLink>
-            </li>
+      <NavLink
+        to="/recepcion/guias/registro"
+        style={({ isActive }) => ({
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+          padding: "7px 12px",
+          borderRadius: "4px",
+          textDecoration: "none",
+          fontSize: "12px",
+          fontWeight: 600,
+          color: isActive ? "#fff" : "#424242",
+          background: isActive ? "#1565c0" : "#fff",
+          border: isActive ? "1px solid #1565c0" : "1px solid #ddd"
+        })}
+      >
+        <i className="material-icons" style={{ fontSize: "18px" }}>
+          post_add
+        </i>
+        Registro de Guías
+      </NavLink>
 
-            <li className="tab">
-              <NavLink
-                to="/recepcion/guias/consulta"
-                className="blue-text text-darken-3"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px"
-                }}
-              >
-                <i className="material-icons" style={{ margin: 0 }}>
-                  search
-                </i>
-                Consulta de Guías
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      )}
+      <NavLink
+        to="/recepcion/guias/consulta"
+        style={({ isActive }) => ({
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+          padding: "7px 12px",
+          borderRadius: "4px",
+          textDecoration: "none",
+          fontSize: "12px",
+          fontWeight: 600,
+          color: isActive ? "#fff" : "#424242",
+          background: isActive ? "#1565c0" : "#fff",
+          border: isActive ? "1px solid #1565c0" : "1px solid #ddd"
+        })}
+      >
+        <i className="material-icons" style={{ fontSize: "18px" }}>
+          search
+        </i>
+        Consulta de Guías
+      </NavLink>
+    </div>
+  </div>
+)}
 
       <div style={{ padding: "20px" }}>
         <Outlet />
